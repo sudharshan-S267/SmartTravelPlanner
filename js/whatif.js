@@ -87,8 +87,9 @@
   function runReoptimization() {
     const currentParams = NEXORA.state.params;
     const newParams     = {
-      from:    currentParams.from,
-      to:      currentParams.to,
+      from:     currentParams.from,
+      to:       currentParams.to,
+      scenario: currentParams.scenario,
       ...getWhatIfParams(),
     };
 

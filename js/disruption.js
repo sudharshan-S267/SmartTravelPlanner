@@ -78,8 +78,12 @@
     const resultEl = document.getElementById('disruption-result');
     if (!resultEl) return;
 
+    const sc = (NEXORA.data && NEXORA.data.getActiveScenario) ? NEXORA.data.getActiveScenario() : null;
+    const destName = sc ? sc.destination : 'Nilgiri';
+    const disruption = NEXORA.data.handleDisruption('weather');
+
     const steps = [
-      'Detecting localized Nilgiri rainfall pattern...',
+      `Detecting localized ${destName} rainfall pattern...`,
       'Replacing outdoor viewpoints with indoor alternatives...',
       'Preserving scheduled transit and check-in times...',
       'Zero cost increase verified across all replacements...',
@@ -96,8 +100,8 @@
       <div class="disruption-alert">
         <span style="font-size:22px;">🌧</span>
         <div>
-          <div style="font-weight:700;letter-spacing:0.06em;color:var(--sand);">🌧 WEATHER CHANGE</div>
-          <div style="font-size:12px;color:var(--text-secondary);margin-top:2px;">"Rain is expected around your outdoor viewpoint."</div>
+          <div style="font-weight:700;letter-spacing:0.06em;color:var(--sand);">${disruption.alert}</div>
+          <div style="font-size:12px;color:var(--text-secondary);margin-top:2px;">"${disruption.message}"</div>
         </div>
       </div>
       <div style="padding:16px 8px;">

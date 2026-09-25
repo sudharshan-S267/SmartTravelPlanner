@@ -105,6 +105,10 @@
     grid-template-columns: 1fr 1fr;
   }
 
+  .planner-route-group {
+    grid-column: span 2;
+  }
+
   .planner-style-transport {
     grid-template-columns: 1fr;
   }
@@ -163,6 +167,32 @@
 
   .planner-grid {
     grid-template-columns: 1fr;
+  }
+
+  .planner-route-group {
+    grid-column: span 1;
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--space-2);
+  }
+
+  .route-swap-wrap {
+    align-self: center;
+    padding: 0;
+    margin: -2px 0;
+  }
+
+  .route-swap-btn {
+    width: 40px;
+    height: 36px;
+  }
+
+  .route-swap-btn .swap-icon {
+    transform: rotate(90deg);
+  }
+
+  .route-swap-btn:hover .swap-icon {
+    transform: rotate(270deg);
   }
 
   .planner-card {

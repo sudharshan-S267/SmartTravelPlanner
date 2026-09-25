@@ -173,9 +173,26 @@
     const fill  = document.getElementById('ai-progress-fill');
     const pctEl = document.getElementById('ai-progress-pct');
 
-    // Reset all steps to pending state
-    steps.forEach(s => {
+    const params = (NEXORA.state && NEXORA.state.params) || { from: 'Coimbatore', to: 'Ooty', budget: 6000, interests: ['Nature', 'Food'] };
+    const dest = params.to || 'Ooty';
+    const origin = params.from || 'Coimbatore';
+    const budget = params.budget || 6000;
+    const interests = (params.interests && params.interests.length) ? params.interests : ['Nature', 'Food'];
+
+    const stepLabels = [
+      `ANALYZING DESTINATION: ${dest.toUpperCase()}`,
+      `MATCHING INTERESTS: ${interests.slice(0, 2).join(' & ').toUpperCase()}`,
+      `OPTIMIZING ROUTE: ${origin.toUpperCase()} → ${dest.toUpperCase()}`,
+      `BALANCING BUDGET: ₹${Number(budget).toLocaleString('en-IN')}`,
+      `CALCULATING EXPEDITION TIME`,
+      `BUILDING YOUR JOURNEY`,
+    ];
+
+    // Reset all steps to pending state with dynamic scenario labels
+    steps.forEach((s, idx) => {
       s.classList.remove('active', 'done');
+      const label = s.querySelector('.ai-step-label');
+      if (label && stepLabels[idx]) label.textContent = stepLabels[idx];
       const status = s.querySelector('.ai-step-status');
       if (status) {
         status.className = 'ai-step-status pending';
@@ -285,10 +302,6 @@
       dashboard.style.transform = 'translateY(30px)';
       dashboard.style.transition = 'opacity 0.7s ease-out, transform 0.7s ease-out';
 
-      // Double rAF: first frame commits the initial opacity:0 paint so the
-      // browser registers the starting state; second frame triggers the
-      // CSS transition to opacity:1. A single rAF skips the starting paint
-      // and the transition never fires, causing transitionend to never run.
       requestAnimationFrame(() => {
         requestAnimationFrame(() => {
           dashboard.style.opacity = '1';
@@ -296,7 +309,6 @@
         });
       });
 
-      // Scroll to dashboard after transition begins
       setTimeout(() => {
         dashboard.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }, 300);
@@ -310,8 +322,26 @@
 
     // Init journey map canvas (needs the dashboard to be visible for sizing)
     setTimeout(() => {
-      try { NEXORA.initJourneyMap(); } catch(e) { console.error('initJourneyMap:', e); }
+      try {
+        NEXORA.initJourneyMap(NEXORA.state.params.scenario);
+      } catch(e) { console.error('initJourneyMap:', e); }
     }, 400);
+
+    // Render AI insights for active scenario
+    try {
+      const sc = (NEXORA.data && NEXORA.data.getActiveScenario) ? NEXORA.data.getActiveScenario() : null;
+      const insightsGrid = document.getElementById('insights-grid');
+      if (insightsGrid && sc && sc.insights) {
+        insightsGrid.innerHTML = sc.insights.map(item => `
+          <div class="insight-card">
+            <div class="insight-icon">${item.icon}</div>
+            <div class="insight-title">${item.title}</div>
+            <div class="insight-body">${item.body}</div>
+            <div class="insight-badge">${item.badge}</div>
+          </div>
+        `).join('');
+      }
+    } catch(e) { console.error('insights render:', e); }
 
     // Animate counters (after scroll settles)
     setTimeout(() => {
@@ -359,6 +389,23 @@
     const b = journey.budget   || {};
     const m = journey.metrics  || {};
     const p = NEXORA.state.params;
+    const sc = (NEXORA.data && NEXORA.data.getActiveScenario) ? NEXORA.data.getActiveScenario() : null;
+
+    const banner  = document.getElementById('summary-banner');
+    const titleEl = document.getElementById('summary-hero-title');
+    const subEl   = document.getElementById('summary-hero-sub');
+
+    if (sc) {
+      if (banner && sc.summaryImage) {
+        banner.style.backgroundImage = `url('${sc.summaryImage}')`;
+      }
+      if (titleEl) {
+        titleEl.textContent = `${sc.destination.toUpperCase()} · EXPEDITION COMPLETE`;
+      }
+      if (subEl) {
+        subEl.textContent = `${sc.origin} → ${sc.destination} Corridor · ${sc.state} · ${sc.destCoord}`;
+      }
+    }
 
     const metrics = [
       { val: `${p.duration} DAYS`,     label: 'DURATION',       color: 'var(--sand)' },

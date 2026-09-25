@@ -206,6 +206,229 @@
   font-weight: var(--weight-regular);
 }
 
+/* === PLANNER ROUTE SELECTOR & SWAP BUTTON === */
+.planner-route-group {
+  display: flex;
+  align-items: flex-end;
+  gap: var(--space-3);
+  width: 100%;
+}
+
+.planner-route-group .planner-field {
+  flex: 1;
+  min-width: 0;
+}
+
+.route-swap-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 2px;
+  flex-shrink: 0;
+}
+
+.route-swap-btn {
+  width: 44px;
+  height: 48px;
+  border-radius: var(--radius-md);
+  background: rgba(15,21,17,0.9);
+  border: 1px solid var(--border);
+  color: var(--gold);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all var(--dur-base) var(--ease-out);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+}
+
+.route-swap-btn .swap-icon {
+  font-size: 18px;
+  line-height: 1;
+  display: inline-block;
+  transition: transform var(--dur-base) var(--ease-out);
+}
+
+.route-swap-btn:hover {
+  border-color: var(--border-gold);
+  background: var(--gold-glow);
+  color: var(--sand);
+  box-shadow: 0 0 16px rgba(207,168,90,0.22);
+}
+
+.route-swap-btn:hover .swap-icon {
+  transform: rotate(180deg);
+}
+
+.route-swap-btn:active {
+  transform: scale(0.92);
+}
+
+.route-swap-btn:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 2px;
+}
+
+/* === CUSTOM SELECT DROPDOWNS === */
+.custom-select-wrap {
+  position: relative;
+  width: 100%;
+}
+
+.custom-select-trigger {
+  width: 100%;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  background: rgba(7,10,9,0.85);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 0 14px;
+  cursor: pointer;
+  text-align: left;
+  transition: border-color var(--dur-base) var(--ease-out), box-shadow var(--dur-base) var(--ease-out), background var(--dur-base);
+  user-select: none;
+}
+
+.custom-select-trigger:hover {
+  border-color: var(--border-gold);
+  background: rgba(12,17,15,0.95);
+}
+
+.custom-select-wrap.open .custom-select-trigger {
+  border-color: var(--border-gold);
+  box-shadow: 0 0 0 3px rgba(207,168,90,0.08);
+  background: rgba(12,17,15,0.98);
+}
+
+.custom-select-trigger:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 2px;
+}
+
+.select-text-group {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 0;
+  gap: 1px;
+}
+
+.select-main-val {
+  font-family: var(--font);
+  font-size: var(--text-base);
+  font-weight: var(--weight-bold);
+  color: var(--sand);
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.select-sub-meta {
+  font-size: 10px;
+  color: var(--text-muted);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  font-weight: var(--weight-medium);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.select-chevron {
+  font-size: 10px;
+  color: var(--gold);
+  opacity: 0.8;
+  transition: transform var(--dur-base) var(--ease-out);
+  flex-shrink: 0;
+  padding-left: 2px;
+}
+
+.custom-select-wrap.open .select-chevron {
+  transform: rotate(180deg);
+}
+
+.custom-select-options {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  right: 0;
+  background: rgba(12,17,15,0.96);
+  border: 1px solid var(--border-gold);
+  border-radius: var(--radius-lg);
+  padding: var(--space-2);
+  margin: 0;
+  list-style: none;
+  z-index: 120;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: 0 16px 36px rgba(0,0,0,0.65), 0 0 20px rgba(207,168,90,0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  animation: select-pop 0.16s var(--ease-out);
+}
+
+.custom-select-options[hidden] {
+  display: none !important;
+}
+
+@keyframes select-pop {
+  from { opacity: 0; transform: translateY(-6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.custom-option {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 8px 12px;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: all var(--dur-fast);
+}
+
+.custom-option .option-city {
+  font-size: var(--text-sm);
+  font-weight: var(--weight-semibold);
+  color: var(--text-primary);
+  letter-spacing: 0.02em;
+}
+
+.custom-option .option-meta {
+  font-size: 10px;
+  color: var(--text-muted);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.custom-option:hover {
+  background: rgba(207,168,90,0.12);
+  border-color: rgba(207,168,90,0.3);
+}
+
+.custom-option:hover .option-city {
+  color: var(--sand);
+}
+
+.custom-option.selected {
+  background: var(--gold-glow);
+  border-color: var(--border-gold);
+}
+
+.custom-option.selected .option-city {
+  color: var(--gold);
+  font-weight: var(--weight-bold);
+}
+
+.custom-option.selected .option-meta {
+  color: var(--sand);
+  opacity: 0.85;
+}
+
 /* === RANGE SLIDER — Travel gold === */
 .budget-slider {
   -webkit-appearance: none;

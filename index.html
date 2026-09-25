@@ -66,32 +66,32 @@
         </h1>
         <p class="hero-sub-heading">YOUR JOURNEY,<br/>INTELLIGENTLY DESIGNED.</p>
         <p class="hero-body">Turn your destination, time, interests and budget into a journey designed around the way you travel.</p>
-        <div class="destination-preview-card">
-          <div class="dest-preview-photo" style="background-image:url('https://images.unsplash.com/photo-1564890369478-c89ca6d9cde9?w=800&q=80');" role="img" aria-label="Ooty Nilgiri Tea Hills">
+        <div class="destination-preview-card" id="hero-dest-card">
+          <div class="dest-preview-photo" id="hero-dest-photo" style="background-image:url('https://images.unsplash.com/photo-1564890369478-c89ca6d9cde9?w=800&q=80');" role="img" aria-label="Ooty Nilgiri Tea Hills">
             <div class="dest-photo-overlay"></div>
-            <div class="dest-preview-tag">FEATURED EXPEDITION</div>
-            <div class="dest-preview-badge">ELEVATION 2,240M</div>
+            <div class="dest-preview-tag" id="hero-dest-tag">FEATURED EXPEDITION</div>
+            <div class="dest-preview-badge" id="hero-dest-badge">ELEVATION 2,240M</div>
           </div>
           <div class="dest-preview-route">
             <div class="dest-preview-point">
               <span class="dest-preview-label">ORIGIN</span>
-              <span class="dest-preview-name">Coimbatore</span>
-              <span class="geo-coord">11°01'N · 76°57'E · 411m</span>
+              <span class="dest-preview-name" id="hero-origin-name">Coimbatore</span>
+              <span class="geo-coord" id="hero-origin-coord">11°01'N · 76°57'E · 411m</span>
             </div>
             <div class="dest-preview-arrow" aria-hidden="true">→</div>
             <div class="dest-preview-point dest-highlight">
               <span class="dest-preview-label">DESTINATION</span>
-              <span class="dest-preview-name serif-display">OOTY</span>
-              <span class="dest-preview-meta">Tamil Nadu, India</span>
-              <span class="geo-coord">11°24'N · 76°41'E · 2,240m</span>
+              <span class="dest-preview-name serif-display" id="hero-dest-name">OOTY</span>
+              <span class="dest-preview-meta" id="hero-dest-meta">Tamil Nadu, India</span>
+              <span class="geo-coord" id="hero-dest-coord">11°24'N · 76°41'E · 2,240m</span>
             </div>
           </div>
           <div class="dest-preview-stats">
-            <span><strong>~85 KM</strong> DISTANCE</span>
-            <span><strong>2 DAYS</strong> JOURNEY</span>
-            <span><strong>₹6,000</strong> ESTIMATE</span>
+            <span id="hero-stat-dist"><strong>~85 KM</strong> DISTANCE</span>
+            <span id="hero-stat-dur"><strong>2 DAYS</strong> JOURNEY</span>
+            <span id="hero-stat-budget"><strong>₹6,000</strong> ESTIMATE</span>
           </div>
-          <div class="dest-preview-interests">
+          <div class="dest-preview-interests" id="hero-dest-interests">
             <span>NATURE</span> · <span>FOOD</span> · <span>PHOTOGRAPHY</span>
           </div>
         </div>
@@ -115,49 +115,49 @@
             <span class="stat-label">OPTIMIZED SAVINGS</span>
           </div>
         </div>
-        <div class="hero-geo-detail">
-          <span class="geo-coord">COIMBATORE · 11°01'N · 76°57'E · 411M</span>
+        <div class="hero-geo-detail" id="hero-geo-detail">
+          <span class="geo-coord" id="hero-geo-origin">COIMBATORE · 11°01'N · 76°57'E · 411M</span>
           <span class="geo-sep">→</span>
-          <span class="geo-coord">OOTY · 11°24'N · 76°41'E · 2,240M</span>
-          <span class="geo-distance">DISTANCE ~85 KM · EXPEDITION 2 DAYS</span>
+          <span class="geo-coord" id="hero-geo-dest">OOTY · 11°24'N · 76°41'E · 2,240M</span>
+          <span class="geo-distance" id="hero-geo-dist">DISTANCE ~85 KM · EXPEDITION 2 DAYS</span>
         </div>
       </div>
       <div class="hero-map-container" data-animate="fade-left">
-        <canvas id="hero-map-canvas" aria-label="Interactive route visualization from Coimbatore to Ooty"></canvas>
+        <canvas id="hero-map-canvas" aria-label="Interactive route visualization"></canvas>
         <!-- Floating Intelligence Cards -->
         <div class="map-card map-card-origin" id="map-card-origin">
           <div class="map-card-dot cyan"></div>
           <div>
-            <div class="map-card-title">COIMBATORE</div>
-            <div class="map-card-sub">11°01'N · 76°57'E · 411m</div>
+            <div class="map-card-title" id="hero-map-origin-title">COIMBATORE</div>
+            <div class="map-card-sub" id="hero-map-origin-sub">11°01'N · 76°57'E · 411m</div>
           </div>
         </div>
         <div class="map-card map-card-dest" id="map-card-dest">
           <div class="map-card-dot gold"></div>
           <div>
-            <div class="map-card-title serif-display">OOTY</div>
-            <div class="map-card-sub">Tamil Nadu · 11°24'N · 76°41'E · 2,240m</div>
+            <div class="map-card-title serif-display" id="hero-map-dest-title">OOTY</div>
+            <div class="map-card-sub" id="hero-map-dest-sub">Tamil Nadu · 11°24'N · 76°41'E · 2,240m</div>
           </div>
         </div>
         <div class="map-card map-card-info" id="map-card-info">
           <div class="map-info-row">
             <span class="map-info-icon">⏱</span>
             <div>
-              <div class="map-info-val">2h 30m</div>
+              <div class="map-info-val" id="hero-map-time">2h 30m</div>
               <div class="map-info-key">TRAVEL TIME</div>
             </div>
           </div>
           <div class="map-info-row">
             <span class="map-info-icon">📍</span>
             <div>
-              <div class="map-info-val">86 km</div>
+              <div class="map-info-val" id="hero-map-dist">86 km</div>
               <div class="map-info-key">DISTANCE</div>
             </div>
           </div>
           <div class="map-info-row">
             <span class="map-info-icon">⛰️</span>
             <div>
-              <div class="map-info-val">+1,829m</div>
+              <div class="map-info-val" id="hero-map-elev">+1,829m</div>
               <div class="map-info-key">ELEVATION GAIN</div>
             </div>
           </div>
@@ -327,18 +327,61 @@
 
       <div class="planner-card" id="planner-card">
         <div class="planner-grid">
-          <div class="planner-field">
-            <label for="from-input" class="field-label">FROM</label>
-            <div class="field-input-wrap">
-              <span class="field-icon">📍</span>
-              <input type="text" id="from-input" class="field-input" value="Coimbatore" placeholder="Origin city" aria-label="Departure city" />
+          <div class="planner-route-group">
+            <div class="planner-field">
+              <label for="from-select-trigger" class="field-label">FROM</label>
+              <div class="custom-select-wrap" id="from-select-wrap">
+                <button type="button" class="custom-select-trigger" id="from-select-trigger" aria-haspopup="listbox" aria-expanded="false" aria-label="Select origin city">
+                  <span class="field-icon">📍</span>
+                  <div class="select-text-group">
+                    <span class="select-main-val" id="from-select-text">Coimbatore</span>
+                    <span class="select-sub-meta" id="from-select-sub">Tamil Nadu · 411m</span>
+                  </div>
+                  <span class="select-chevron" aria-hidden="true">▾</span>
+                </button>
+                <input type="hidden" id="from-input" value="Coimbatore" />
+                <ul class="custom-select-options" id="from-select-options" role="listbox" hidden>
+                  <li class="custom-option selected" data-value="Coimbatore" data-sub="Tamil Nadu · 411m" role="option" aria-selected="true">
+                    <span class="option-city">Coimbatore</span>
+                    <span class="option-meta">Expedition Hub · 411m</span>
+                  </li>
+                  <li class="custom-option" data-value="Tiruppur" data-sub="Kongu Valley · 295m" role="option" aria-selected="false">
+                    <span class="option-city">Tiruppur</span>
+                    <span class="option-meta">Kongu Valley · 295m</span>
+                  </li>
+                </ul>
+              </div>
             </div>
-          </div>
-          <div class="planner-field">
-            <label for="to-input" class="field-label">TO</label>
-            <div class="field-input-wrap">
-              <span class="field-icon">🎯</span>
-              <input type="text" id="to-input" class="field-input" value="Ooty" placeholder="Destination city" aria-label="Destination city" />
+
+            <div class="route-swap-wrap">
+              <button type="button" id="route-swap-btn" class="route-swap-btn" aria-label="Swap Route" title="Swap route / switch expedition">
+                <span class="swap-icon">⇄</span>
+              </button>
+            </div>
+
+            <div class="planner-field">
+              <label for="to-select-trigger" class="field-label">TO</label>
+              <div class="custom-select-wrap" id="to-select-wrap">
+                <button type="button" class="custom-select-trigger" id="to-select-trigger" aria-haspopup="listbox" aria-expanded="false" aria-label="Select destination city">
+                  <span class="field-icon">🎯</span>
+                  <div class="select-text-group">
+                    <span class="select-main-val" id="to-select-text">Ooty</span>
+                    <span class="select-sub-meta" id="to-select-sub">Nilgiri Hills · 2,240m</span>
+                  </div>
+                  <span class="select-chevron" aria-hidden="true">▾</span>
+                </button>
+                <input type="hidden" id="to-input" value="Ooty" />
+                <ul class="custom-select-options" id="to-select-options" role="listbox" hidden>
+                  <li class="custom-option selected" data-value="Ooty" data-sub="Nilgiri Hills · 2,240m" role="option" aria-selected="true">
+                    <span class="option-city">Ooty</span>
+                    <span class="option-meta">Nilgiri Hills · 2,240m</span>
+                  </li>
+                  <li class="custom-option" data-value="Kodaikanal" data-sub="Palani Hills · 2,133m" role="option" aria-selected="false">
+                    <span class="option-city">Kodaikanal</span>
+                    <span class="option-meta">Palani Hills · 2,133m</span>
+                  </li>
+                </ul>
+              </div>
             </div>
           </div>
           <div class="planner-field">
@@ -493,8 +536,8 @@
     <section id="journey" class="journey-section" aria-labelledby="journey-heading">
       <div class="section-inner journey-layout">
         <div class="journey-left">
-          <p class="eyebrow">PERSONALIZED JOURNEY</p>
-          <h2 id="journey-heading" class="section-heading">YOUR <span class="text-gold">JOURNEY</span></h2>
+          <p class="eyebrow" id="journey-eyebrow">PERSONALIZED JOURNEY · COIMBATORE → OOTY</p>
+          <h2 id="journey-heading" class="section-heading">YOUR <span class="text-gold" id="journey-dest-text">OOTY EXPEDITION</span></h2>
           <div class="day-tabs" role="tablist" aria-label="Journey days">
             <button class="day-tab active" role="tab" aria-selected="true" aria-controls="day-1-panel" id="day-1-tab" data-day="1">DAY 01</button>
             <button class="day-tab" role="tab" aria-selected="false" aria-controls="day-2-panel" id="day-2-tab" data-day="2">DAY 02</button>
@@ -723,10 +766,10 @@
         <h2 id="summary-heading" class="section-heading">YOUR JOURNEY,<br/><span class="text-gold">OPTIMIZED.</span></h2>
 
         <div class="summary-card">
-          <div class="summary-hero-banner" style="background-image:url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1200&q=80');" role="img" aria-label="Nilgiri Mountain Range">
+          <div class="summary-hero-banner" id="summary-banner" style="background-image:url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1200&q=80');" role="img" aria-label="Expedition Mountain Range">
             <div class="summary-hero-overlay"></div>
-            <div class="summary-hero-title serif-display">OOTY · EXPEDITION COMPLETE</div>
-            <div class="summary-hero-sub">Western Ghats Corridor · Tamil Nadu, India · 11°24'N · 76°41'E</div>
+            <div class="summary-hero-title serif-display" id="summary-hero-title">OOTY · EXPEDITION COMPLETE</div>
+            <div class="summary-hero-sub" id="summary-hero-sub">Western Ghats Corridor · Tamil Nadu, India · 11°24'N · 76°41'E</div>
           </div>
           <div class="summary-glow"></div>
           <div class="summary-metrics" id="summary-metrics">

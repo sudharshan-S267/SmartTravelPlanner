@@ -17,29 +17,37 @@
 
   const C = NEXORA.colors;
 
-  // Journey map nodes (Coimbatore → Ooty route)
-  const MAP_NODES = [
-    { id: 'origin',            label: 'COIMBATORE',       x: 0.10, y: 0.85, color: '#55C7D6', type: 'origin',      category: null, size: 8 },
-    { id: 'mettupalayam',      label: 'Mettupalayam',      x: 0.22, y: 0.73, color: '#739EB5', type: 'transit',     category: null, size: 5 },
-    { id: 'coonoor',           label: 'Coonoor',           x: 0.44, y: 0.48, color: '#739EB5', type: 'transit',     category: null, size: 5 },
-    { id: 'coonoor-viewpoint',  label: "Sim's Park",        x: 0.50, y: 0.44, color: '#CFA85A', type: 'activity',    category: 'nature', size: 7 },
-    { id: 'tea-estate',        label: 'Tea Estate',        x: 0.57, y: 0.37, color: '#CFA85A', type: 'activity',    category: 'nature', size: 7 },
-    { id: 'botanical-garden',  label: 'Botanical Garden',  x: 0.63, y: 0.28, color: '#CFA85A', type: 'activity',    category: 'nature', size: 7 },
-    { id: 'doddabetta-peak',   label: 'Doddabetta Peak',   x: 0.70, y: 0.20, color: '#CFA85A', type: 'activity',    category: 'photo', size: 8 },
-    { id: 'local-food-market', label: 'Local Food Market', x: 0.75, y: 0.16, color: '#CFA85A', type: 'activity',    category: 'food', size: 7 },
-    { id: 'destination',       label: 'OOTY',              x: 0.82, y: 0.11, color: '#CFA85A', type: 'destination', category: null, size: 9 },
-  ];
+  let MAP_NODES = [];
+  let ROUTE_PATH = [];
 
-  const ROUTE_PATH = MAP_NODES.filter(n => n.type === 'origin' || n.type === 'transit' || n.type === 'destination');
+  function loadNodes(scenarioKey) {
+    const sc = (window.NEXORA && NEXORA.data && NEXORA.data.SCENARIOS && NEXORA.data.SCENARIOS[scenarioKey])
+      ? NEXORA.data.SCENARIOS[scenarioKey]
+      : (window.NEXORA && NEXORA.data && NEXORA.data.getActiveScenario ? NEXORA.data.getActiveScenario() : null);
+
+    if (sc && sc.journeyMap && sc.journeyMap.nodes) {
+      MAP_NODES = sc.journeyMap.nodes;
+    } else {
+      MAP_NODES = [
+        { id: 'origin', label: 'COIMBATORE', x: 0.10, y: 0.85, color: '#55C7D6', type: 'origin', category: null, size: 8 },
+        { id: 'mettupalayam', label: 'Mettupalayam', x: 0.22, y: 0.73, color: '#739EB5', type: 'transit', category: null, size: 5 },
+        { id: 'coonoor', label: 'Coonoor', x: 0.44, y: 0.48, color: '#739EB5', type: 'transit', category: null, size: 5 },
+        { id: 'destination', label: 'OOTY', x: 0.82, y: 0.11, color: '#CFA85A', type: 'destination', category: null, size: 9 },
+      ];
+    }
+    ROUTE_PATH = MAP_NODES.filter(n => n.type === 'origin' || n.type === 'transit' || n.type === 'destination');
+    routeProgress = 0;
+  }
 
   function toScreen(n) {
     return { x: n.x * W, y: n.y * H };
   }
 
-  function init() {
+  function init(scenarioKey) {
     canvas = document.getElementById('journey-map-canvas');
     if (!canvas) return;
 
+    loadNodes(scenarioKey || (NEXORA.state && NEXORA.state.params ? NEXORA.state.params.scenario : 'coimbatore_ooty'));
     ctx = canvas.getContext('2d');
     resize();
     window.addEventListener('resize', resize, { passive: true });
@@ -51,7 +59,13 @@
     if (animFrame) cancelAnimationFrame(animFrame);
     animFrame = requestAnimationFrame(frame);
 
-    NEXORA.journeyMap = { highlightNode };
+    NEXORA.journeyMap = {
+      highlightNode,
+      setScenario(key) {
+        loadNodes(key);
+        resize();
+      }
+    };
   }
 
   function resize() {

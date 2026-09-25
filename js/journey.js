@@ -13,16 +13,25 @@
     return '₹' + Math.round(n).toLocaleString('en-IN');
   }
 
-  const DAY_CHAPTERS = [
-    { chapter: 'THE ARRIVAL', title: 'ARRIVE & EXPLORE', tags: 'Nature · Food · Photography' },
-    { chapter: 'THE RETURN', title: 'DISCOVER & RETURN', tags: 'Scenic · Culture · Food' },
-    { chapter: 'DAY THREE', title: 'VALLEY EXPEDITION', tags: 'Nature · Culture · Wellness' },
-    { chapter: 'DAY FOUR', title: 'HIGHLAND DISCOVERY', tags: 'Adventure · Food · Photo' },
-    { chapter: 'DAY FIVE', title: 'FAREWELL TO THE NILGIRIS', tags: 'Culture · Shopping · Food' },
-  ];
+  function getDayChapter(dayIndex, destination) {
+    const dest = destination || (NEXORA.state && NEXORA.state.params ? NEXORA.state.params.to : 'Ooty');
+    const chapters = [
+      { chapter: 'THE ARRIVAL', title: 'ARRIVE & EXPLORE', tags: 'Nature · Food · Photography' },
+      { chapter: 'THE RETURN', title: 'DISCOVER & RETURN', tags: 'Scenic · Culture · Food' },
+      { chapter: 'DAY THREE', title: 'VALLEY EXPEDITION', tags: 'Nature · Culture · Wellness' },
+      { chapter: 'DAY FOUR', title: 'HIGHLAND DISCOVERY', tags: 'Adventure · Food · Photo' },
+      { chapter: 'DAY FIVE', title: `FAREWELL TO ${dest.toUpperCase()}`, tags: 'Culture · Shopping · Food' },
+    ];
+    return chapters[dayIndex] || {
+      chapter: `DAY ${String(dayIndex + 1).padStart(2, '0')}`,
+      title: 'YOUR EXPEDITION',
+      tags: 'Personalized · Optimized',
+    };
+  }
 
   // High-quality cinematic editorial photography
   const ACTIVITY_IMAGES = {
+    // Nilgiri / Ooty activities
     'botanical-garden': 'https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=800&q=80',
     'doddabetta-peak': 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80',
     'ooty-lake': 'https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=800&q=80',
@@ -39,6 +48,25 @@
     'honey-valley': 'https://images.unsplash.com/photo-1448375240586-882707db888b?w=800&q=80',
     'breakfast-coonoor': 'https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=800&q=80',
     'return-journey': 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=800&q=80',
+
+    // Palani / Kodaikanal activities
+    'kodai-lake': 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=800&q=80',
+    'coakers-walk': 'https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=800&q=80',
+    'pine-forest': 'https://images.unsplash.com/photo-1448375240586-882707db888b?w=800&q=80',
+    'pillar-rocks': 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=800&q=80',
+    'bryant-park': 'https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=800&q=80',
+    'kodai-food-market': 'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=800&q=80',
+    'chettiar-park': 'https://images.unsplash.com/photo-1493246507139-91e8fad9978e?w=800&q=80',
+    'silver-cascade': 'https://images.unsplash.com/photo-1432405972618-c60b0225b8f9?w=800&q=80',
+    'shembaganur-museum': 'https://images.unsplash.com/photo-1576092768241-dec231879fc3?w=800&q=80',
+    'bear-shola-falls': 'https://images.unsplash.com/photo-1432405972618-c60b0225b8f9?w=800&q=80',
+    'guna-caves': 'https://images.unsplash.com/photo-1518998053901-5348d3961a04?w=800&q=80',
+    'kurinji-andavar': 'https://images.unsplash.com/photo-1519681393784-d120267933ba?w=800&q=80',
+    'mannavanur-lake': 'https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=800&q=80',
+    'dolphin-nose': 'https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=800&q=80',
+    'dindigul-thalappakatti': 'https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=800&q=80',
+    'tanjore-art': 'https://images.unsplash.com/photo-1518998053901-5348d3961a04?w=800&q=80',
+    'local-chocolates': 'https://images.unsplash.com/photo-1488459716781-31db52582fe9?w=800&q=80',
   };
 
   function getCategoryStyle(cat) {
@@ -124,15 +152,11 @@
     `;
   }
 
-  function renderDay(activities, panelId, dayIndex) {
+  function renderDay(activities, panelId, dayIndex, destination) {
     const panel = document.getElementById(panelId);
     if (!panel) return;
 
-    const chapter = DAY_CHAPTERS[dayIndex] || {
-      chapter: `DAY ${String(dayIndex + 1).padStart(2, '0')}`,
-      title: 'YOUR EXPEDITION',
-      tags: 'Personalized · Optimized',
-    };
+    const chapter = getDayChapter(dayIndex, destination);
 
     const chapterHTML = `
       <div class="day-chapter">
@@ -184,6 +208,14 @@
     if (!journey || !journey.schedule) return;
 
     const { schedule } = journey;
+    const dest = journey.destination || (NEXORA.state && NEXORA.state.params ? NEXORA.state.params.to : 'Ooty');
+    const origin = journey.origin || (NEXORA.state && NEXORA.state.params ? NEXORA.state.params.from : 'Coimbatore');
+
+    // Update section header
+    const eyeEl = document.getElementById('journey-eyebrow');
+    const destEl = document.getElementById('journey-dest-text');
+    if (eyeEl) eyeEl.textContent = `PERSONALIZED JOURNEY · ${origin.toUpperCase()} → ${dest.toUpperCase()}`;
+    if (destEl) destEl.textContent = `${dest.toUpperCase()} EXPEDITION`;
 
     // Build day tabs dynamically
     const tabContainer = document.querySelector('.day-tabs');
@@ -215,7 +247,7 @@
         if (i > 0) panel.hidden = true;
         document.querySelector('.journey-left').appendChild(panel);
       }
-      renderDay(dayActivities, panelId, i);
+      renderDay(dayActivities, panelId, i, dest);
     });
 
     // Day tab switching

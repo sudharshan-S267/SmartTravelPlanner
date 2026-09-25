@@ -19,53 +19,26 @@
   let routeProgress = 0;
   let routeDrawn = false;
   let hoveredNode = null;
+  let currentScenarioKey = 'coimbatore_ooty';
+  let routePoints = [];
+  let stops = [];
+  let altRoute = [];
+  let mountainContours = [];
 
-  // Real-world modeled route points (normalized 0-1 coords scaled to canvas)
-  // Coimbatore (~411m) -> Mettupalayam (Ghat road start) -> Coonoor -> Ooty (~2,240m)
-  const routePoints = [
-    { x: 0.12, y: 0.84 },  // Coimbatore origin
-    { x: 0.22, y: 0.76 },  // Mettupalayam (Foot of Nilgiris)
-    { x: 0.31, y: 0.67 },  // Kallar ascent
-    { x: 0.39, y: 0.58 },  // Hairpin bend 12
-    { x: 0.46, y: 0.46 },  // Coonoor Ghats
-    { x: 0.54, y: 0.36 },  // Coonoor town
-    { x: 0.61, y: 0.28 },  // Wellington / Valley
-    { x: 0.68, y: 0.21 },  // Doddabetta ridge
-    { x: 0.75, y: 0.16 },  // Botanical Garden approach
-    { x: 0.83, y: 0.13 },  // Ooty destination
-  ];
+  function loadScenario(key) {
+    const sc = (window.NEXORA && NEXORA.data && NEXORA.data.SCENARIOS && NEXORA.data.SCENARIOS[key])
+      ? NEXORA.data.SCENARIOS[key]
+      : (window.NEXORA && NEXORA.data && NEXORA.data.SCENARIOS ? NEXORA.data.SCENARIOS.coimbatore_ooty : null);
 
-  // Journey Stops & Experiences along the route
-  const stops = [
-    { id: 'coimbatore', x: 0.12, y: 0.84, name: 'Coimbatore', type: 'origin', category: null, elev: '411m', coord: '11°01\'N' },
-    { id: 'mettupalayam', x: 0.22, y: 0.76, name: 'Mettupalayam', type: 'transit', category: null, elev: '320m', coord: 'Hill Foot' },
-    { id: 'simspark', x: 0.46, y: 0.46, name: "Sim's Park", type: 'activity', category: 'nature', elev: '1,780m', match: '88%' },
-    { id: 'tea-estate', x: 0.54, y: 0.36, name: 'Tea Estate', type: 'activity', category: 'nature', elev: '1,850m', match: '92%' },
-    { id: 'food-market', x: 0.61, y: 0.28, name: 'Nilgiri Food', type: 'activity', category: 'food', elev: '1,920m', match: '90%' },
-    { id: 'doddabetta', x: 0.68, y: 0.21, name: 'Viewpoint', type: 'activity', category: 'photo', elev: '2,637m', match: '95%' },
-    { id: 'botanical', x: 0.75, y: 0.16, name: 'Botanical Garden', type: 'activity', category: 'nature', elev: '2,100m', match: '94%' },
-    { id: 'ooty', x: 0.83, y: 0.13, name: 'Ooty', type: 'destination', category: null, elev: '2,240m', coord: '11°24\'N · 76°41\'E' },
-  ];
-
-  // Alternative scenic route (Coonoor loop)
-  const altRoute = [
-    { x: 0.12, y: 0.84 },
-    { x: 0.25, y: 0.69 },
-    { x: 0.36, y: 0.51 },
-    { x: 0.52, y: 0.38 },
-    { x: 0.71, y: 0.20 },
-    { x: 0.83, y: 0.13 },
-  ];
-
-  // Mountain ridge elevation contours (Nilgiri topographic mass)
-  const mountainContours = [
-    { cx: 0.72, cy: 0.24, rx: 170, ry: 100, rot: -0.28, elev: '2,400m' },
-    { cx: 0.70, cy: 0.26, rx: 135, ry: 78,  rot: -0.25, elev: '2,100m' },
-    { cx: 0.66, cy: 0.30, rx: 105, ry: 58,  rot: -0.22, elev: '1,800m' },
-    { cx: 0.50, cy: 0.44, rx: 80,  ry: 45,  rot: -0.18, elev: '1,500m' },
-    { cx: 0.38, cy: 0.58, rx: 65,  ry: 38,  rot: -0.15, elev: '1,100m' },
-    { cx: 0.24, cy: 0.74, rx: 55,  ry: 30,  rot:  0.10, elev: '600m' },
-  ];
+    if (!sc || !sc.heroMap) return;
+    currentScenarioKey = sc.key;
+    routePoints = sc.heroMap.routePoints || [];
+    stops = sc.heroMap.stops || [];
+    altRoute = sc.heroMap.altRoute || [];
+    mountainContours = sc.heroMap.mountainContours || [];
+    routeProgress = 0;
+    routeDrawn = false;
+  }
 
   function resize() {
     const parent = canvas.parentElement;
@@ -418,7 +391,7 @@
     ctx.font = '500 8px monospace';
     ctx.fillStyle = 'rgba(169,174,167,0.3)';
     ctx.textAlign = 'left';
-    ctx.fillText('NILGIRI EXPEDITION SECTOR · NH181', 16, H - 14);
+    ctx.fillText(currentScenarioKey === 'tiruppur_kodaikanal' ? 'PALANI EXPEDITION SECTOR · SH156' : 'NILGIRI EXPEDITION SECTOR · NH181', 16, H - 14);
 
     ctx.textAlign = 'right';
     ctx.fillText('SCALE 1:50,000 · CONTOUR 100M', W - 16, H - 14);
@@ -472,7 +445,17 @@
     routeDrawn = false;
   }, { passive: true });
 
+  const initialScenario = (window.NEXORA && NEXORA.state && NEXORA.state.params && NEXORA.state.params.scenario) || 'coimbatore_ooty';
+  loadScenario(initialScenario);
   resize();
   animFrame = requestAnimationFrame(frame);
+
+  window.NEXORA = window.NEXORA || {};
+  window.NEXORA.heroMap = {
+    setScenario(key) {
+      loadScenario(key);
+      resize();
+    }
+  };
 
 })();
