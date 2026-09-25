@@ -1,0 +1,227 @@
+/* ============================================================
+   NEXORA ANIMATIONS
+   Entrance animations, section reveals, transitions
+   ============================================================ */
+
+/* === ENTRANCE ANIMATIONS === */
+
+[data-animate] {
+  opacity: 0;
+  transition: opacity var(--dur-slowest) var(--ease-out),
+              transform var(--dur-slowest) var(--ease-out);
+}
+
+[data-animate="fade-up"] {
+  transform: translateY(40px);
+}
+
+[data-animate="fade-left"] {
+  transform: translateX(40px);
+}
+
+[data-animate="fade-in"] {
+  transform: none;
+}
+
+[data-animate="scale-in"] {
+  transform: scale(0.92);
+}
+
+[data-animate].animated {
+  opacity: 1;
+  transform: none;
+}
+
+/* Stagger children */
+.stagger-children > * {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity var(--dur-slow) var(--ease-out),
+              transform var(--dur-slow) var(--ease-out);
+}
+
+.stagger-children.animated > *:nth-child(1)  { opacity: 1; transform: none; transition-delay: 0ms; }
+.stagger-children.animated > *:nth-child(2)  { opacity: 1; transform: none; transition-delay: 80ms; }
+.stagger-children.animated > *:nth-child(3)  { opacity: 1; transform: none; transition-delay: 160ms; }
+.stagger-children.animated > *:nth-child(4)  { opacity: 1; transform: none; transition-delay: 240ms; }
+.stagger-children.animated > *:nth-child(5)  { opacity: 1; transform: none; transition-delay: 320ms; }
+.stagger-children.animated > *:nth-child(6)  { opacity: 1; transform: none; transition-delay: 400ms; }
+.stagger-children.animated > *:nth-child(7)  { opacity: 1; transform: none; transition-delay: 480ms; }
+.stagger-children.animated > *:nth-child(8)  { opacity: 1; transform: none; transition-delay: 560ms; }
+
+/* === ROUTE DRAWING === */
+.route-draw {
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+  animation: draw-route 2s var(--ease-out) forwards;
+}
+
+@keyframes draw-route {
+  to { stroke-dashoffset: 0; }
+}
+
+/* === COUNTER ANIMATION === */
+@keyframes count-up {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* === HERO ENTRANCE === */
+.hero-content .eyebrow {
+  animation: hero-entry-1 0.6s var(--ease-out) 0.1s both;
+}
+.hero-content .hero-heading {
+  animation: hero-entry-1 0.8s var(--ease-out) 0.2s both;
+}
+.hero-content .hero-sub-heading {
+  animation: hero-entry-1 0.8s var(--ease-out) 0.35s both;
+}
+.hero-content .hero-body {
+  animation: hero-entry-1 0.7s var(--ease-out) 0.5s both;
+}
+.hero-content .hero-ctas {
+  animation: hero-entry-1 0.7s var(--ease-out) 0.65s both;
+}
+.hero-content .hero-stats {
+  animation: hero-entry-1 0.7s var(--ease-out) 0.8s both;
+}
+
+.hero-map-container {
+  animation: hero-entry-right 1s var(--ease-out) 0.3s both;
+}
+
+@keyframes hero-entry-1 {
+  from { opacity: 0; transform: translateY(30px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes hero-entry-right {
+  from { opacity: 0; transform: translateX(30px) scale(0.97); }
+  to   { opacity: 1; transform: translateX(0) scale(1); }
+}
+
+/* === GLOW PULSE === */
+@keyframes glow-pulse {
+  0%, 100% { box-shadow: 0 4px 20px rgba(207,168,90,0.12); }
+  50%       { box-shadow: 0 6px 28px rgba(207,168,90,0.22); }
+}
+
+.glow-pulse {
+  animation: glow-pulse 3s ease-in-out infinite;
+}
+
+/* === MAP NODE PULSE === */
+@keyframes node-pulse {
+  0%, 100% {
+    r: 6;
+    opacity: 1;
+  }
+  50% {
+    r: 9;
+    opacity: 0.6;
+  }
+}
+
+/* === SECTION BACKGROUND GLOW === */
+.has-glow-bg {
+  position: relative;
+  overflow: hidden;
+}
+
+.has-glow-bg::before {
+  content: '';
+  position: absolute;
+  width: 600px;
+  height: 600px;
+  border-radius: 50%;
+  background: radial-gradient(ellipse, rgba(110,139,104,0.04) 0%, transparent 70%);
+  top: -100px;
+  right: -100px;
+  pointer-events: none;
+}
+
+.has-gold-glow::after {
+  content: '';
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  border-radius: 50%;
+  background: radial-gradient(ellipse, rgba(255,209,102,0.04) 0%, transparent 70%);
+  bottom: -100px;
+  left: -100px;
+  pointer-events: none;
+}
+
+/* Loading skeleton */
+@keyframes skeleton-wave {
+  0%   { background-position: -400px 0; }
+  100% { background-position: 400px 0; }
+}
+
+.skeleton {
+  background: linear-gradient(90deg, var(--card) 25%, var(--card-elevated) 50%, var(--card) 75%);
+  background-size: 800px 100%;
+  animation: skeleton-wave 1.5s ease-in-out infinite;
+  border-radius: var(--radius-md);
+}
+
+/* === DISRUPTION SHAKE === */
+@keyframes disruption-shake {
+  0%, 100% { transform: translateX(0); }
+  20%       { transform: translateX(-8px); }
+  40%       { transform: translateX(8px); }
+  60%       { transform: translateX(-5px); }
+  80%       { transform: translateX(5px); }
+}
+
+.disruption-shake {
+  animation: disruption-shake 0.5s var(--ease-out);
+}
+
+/* === RECALCULATING === */
+@keyframes recalculating {
+  0%   { opacity: 0.3; }
+  50%  { opacity: 1; }
+  100% { opacity: 0.3; }
+}
+
+.recalculating {
+  animation: recalculating 1s ease-in-out infinite;
+  color: var(--sand);
+}
+
+/* === ATTENTION PULSE (for active states) === */
+/* attention-pulse defined in components.css (gold, activity cards) */
+
+/* === REDUCED MOTION OVERRIDES === */
+@media (prefers-reduced-motion: reduce) {
+  [data-animate] {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+
+  .stagger-children > * {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .hero-content .eyebrow,
+  .hero-content .hero-heading,
+  .hero-content .hero-sub-heading,
+  .hero-content .hero-body,
+  .hero-content .hero-ctas,
+  .hero-content .hero-stats,
+  .hero-map-container {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .map-card { animation: none !important; }
+  .fragment-card { animation: none !important; }
+  .hero-scroll-hint { animation: none !important; }
+  .ai-ring { animation: none !important; }
+  .optimize-badge, .activity-dot, .badge-dot { animation: none !important; }
+  .ai-step-status.active { animation: none !important; }
+}

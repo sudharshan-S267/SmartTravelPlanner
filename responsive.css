@@ -1,0 +1,364 @@
+/* ============================================================
+   NEXORA RESPONSIVE DESIGN
+   Tablet: 768px, Mobile: 480px, Small: 375px
+   ============================================================ */
+
+/* === LARGE DESKTOP (1440px+) === */
+@media (min-width: 1440px) {
+  .hero-inner {
+    gap: var(--space-24);
+  }
+
+  .hero-map-container {
+    height: 600px;
+  }
+
+  .intelligence-grid {
+    grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
+  }
+}
+
+/* === TABLET (1024px) === */
+@media (max-width: 1024px) {
+  :root {
+    --section-py: var(--space-20);
+  }
+
+  .hero-inner {
+    grid-template-columns: 1fr;
+    gap: var(--space-12);
+    padding: var(--space-16) var(--space-6) var(--space-12);
+  }
+
+  .hero-content {
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .hero-ctas {
+    justify-content: center;
+  }
+
+  .hero-stats {
+    justify-content: center;
+  }
+
+  .hero-map-container {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    height: 400px;
+  }
+
+  .hero-scroll-hint { display: none; }
+
+  .intelligence-grid {
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: var(--space-4);
+  }
+
+  .metric-card.metric-large {
+    grid-column: span 3;
+  }
+
+  .journey-layout {
+    grid-template-columns: 1fr;
+    gap: var(--space-8);
+  }
+
+  .journey-right {
+    order: -1;
+  }
+
+  .journey-map-container {
+    position: relative;
+    top: 0;
+  }
+
+  #journey-map-canvas {
+    height: 300px;
+  }
+
+  .budget-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .whatif-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .whatif-controls-card {
+    position: relative;
+    top: 0;
+  }
+
+  .disruption-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .insights-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .planner-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .planner-style-transport {
+    grid-template-columns: 1fr;
+  }
+
+  .footer-inner {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-8);
+  }
+
+  .footer-note {
+    grid-column: span 2;
+  }
+
+  .nav-links { display: none; }
+  .nav-cta   { display: none; }
+  .nav-hamburger { display: flex; }
+
+  .section-inner {
+    padding: var(--section-py) var(--space-6);
+  }
+}
+
+/* === MOBILE (640px) === */
+@media (max-width: 640px) {
+  :root {
+    --section-py: var(--space-16);
+  }
+
+  .hero-inner {
+    padding: var(--space-12) var(--space-4) var(--space-10);
+  }
+
+  .hero-heading {
+    font-size: clamp(40px, 11vw, 64px);
+  }
+
+  .hero-map-container {
+    height: 320px;
+  }
+
+  .map-card { display: none; }
+  .map-card-origin,
+  .map-card-dest { display: flex; }
+
+  .map-card-info,
+  .map-card-optimize,
+  .map-card-activity { display: none; }
+
+  .intelligence-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .metric-card.metric-large {
+    grid-column: span 2;
+  }
+
+  .planner-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .planner-card {
+    padding: var(--space-6);
+  }
+
+  .hero-ctas {
+    flex-direction: column;
+  }
+
+  .hero-ctas .btn {
+    width: 100%;
+    text-align: center;
+    justify-content: center;
+  }
+
+  .hero-stats {
+    flex-direction: row;
+    gap: var(--space-4);
+  }
+
+  .hero-stat-divider { display: none; }
+
+  .problem-fragments {
+    gap: var(--space-3);
+  }
+
+  .fragment-card {
+    padding: var(--space-4) var(--space-5);
+  }
+
+  .process-step {
+    grid-template-columns: 50px 1fr;
+  }
+
+  .step-connector { display: none; }
+
+  .step-number {
+    font-size: 28px;
+    padding-top: var(--space-2);
+  }
+
+  .journey-comparison {
+    grid-template-columns: 1fr;
+    gap: var(--space-4);
+  }
+
+  .comparison-vs {
+    padding: var(--space-2) 0;
+  }
+
+  .disruption-plans {
+    grid-template-columns: 1fr;
+  }
+
+  .disruption-arrow { display: none; }
+
+  .insights-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .summary-metrics {
+    gap: var(--space-6);
+  }
+
+  .summary-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .summary-actions .btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .footer-inner {
+    grid-template-columns: 1fr;
+  }
+
+  .footer-note { grid-column: span 1; }
+
+  .section-inner {
+    padding: var(--section-py) var(--space-4);
+  }
+
+  .faq-question {
+    font-size: var(--text-base);
+  }
+
+  #toast-container {
+    bottom: var(--space-4);
+    right: var(--space-4);
+    left: var(--space-4);
+  }
+
+  .toast {
+    min-width: auto;
+  }
+
+  .opt-comparison {
+    gap: var(--space-3);
+  }
+
+  .opt-val {
+    font-size: var(--text-lg);
+  }
+}
+
+/* === SMALL MOBILE (375px) === */
+@media (max-width: 375px) {
+  .hero-heading {
+    font-size: 36px;
+  }
+
+  .section-heading {
+    font-size: 28px;
+  }
+
+  .planner-card {
+    padding: var(--space-4);
+  }
+
+  .style-options {
+    flex-direction: column;
+  }
+
+  .style-option {
+    flex: none;
+  }
+
+  .intelligence-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .metric-card.metric-large {
+    grid-column: span 1;
+  }
+
+  .budget-donut-wrap {
+    width: 160px;
+    height: 160px;
+  }
+
+  #budget-donut {
+    width: 160px;
+    height: 160px;
+  }
+}
+
+/* === VERY SMALL (320px) === */
+@media (max-width: 320px) {
+  .hero-heading {
+    font-size: 30px;
+  }
+
+  .btn-xlarge {
+    height: 52px;
+    padding: 0 var(--space-6);
+    font-size: var(--text-sm);
+  }
+}
+
+/* === OVERFLOW PREVENTION === */
+@media (max-width: 768px) {
+  html, body {
+    overflow-x: hidden;
+  }
+
+  .hero-section,
+  .problem-section,
+  .how-section,
+  .planner-section,
+  .intelligence-section,
+  .journey-section,
+  .budget-section,
+  .whatif-section,
+  .disruption-section,
+  .insights-section,
+  .summary-section,
+  .faq-section,
+  .final-cta-section {
+    overflow-x: hidden;
+  }
+}
+
+/* === HOVER INTERACTIONS: touch devices === */
+@media (hover: none) {
+  .card:hover,
+  .activity-card:hover,
+  .metric-card:hover,
+  .insight-card:hover,
+  .fragment-card:hover {
+    transform: none;
+  }
+
+  .btn-primary:hover {
+    transform: none;
+  }
+}

@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="NEXORA — AI-Powered Travel Intelligence Platform. Plan less, experience more. Your journey, intelligently designed." />
+  <meta name="keywords" content="AI travel planner, smart travel, adaptive itinerary, personalized travel, NEXORA" />
+  <title>NEXORA — Your Journey. Intelligently Designed.</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/tokens.css" />
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/layout.css" />
+  <link rel="stylesheet" href="css/animations.css" />
+  <link rel="stylesheet" href="css/responsive.css" />
+</head>
+<body>
+  <!-- Background Canvas -->
+  <canvas id="bg-canvas" aria-hidden="true"></canvas>
+
+  <!-- Toast Container -->
+  <div id="toast-container" role="status" aria-live="polite"></div>
+
+  <!-- Navigation -->
+  <nav id="navbar" role="navigation" aria-label="Main navigation">
+    <div class="nav-inner">
+      <a href="#hero" class="nav-logo" aria-label="NEXORA Home">
+        <span class="logo-icon" aria-hidden="true">◈</span>
+        <div class="logo-text-group">
+          <span class="logo-text">NEXORA</span>
+          <span class="logo-sub">TRAVEL INTELLIGENCE</span>
+        </div>
+      </a>
+      <div class="nav-links" role="list">
+        <a href="#planner" class="nav-link" role="listitem">PLAN</a>
+        <a href="#journey" class="nav-link" role="listitem">JOURNEY</a>
+        <a href="#map" class="nav-link" role="listitem">MAP</a>
+        <a href="#intelligence" class="nav-link" role="listitem">INTELLIGENCE</a>
+      </div>
+      <a href="#planner" class="btn btn-primary nav-cta">START PLANNING</a>
+      <button class="nav-hamburger" id="nav-hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <div class="mobile-menu" id="mobile-menu" aria-hidden="true">
+      <a href="#planner" class="mobile-nav-link">PLAN</a>
+      <a href="#journey" class="mobile-nav-link">JOURNEY</a>
+      <a href="#map" class="mobile-nav-link">MAP</a>
+      <a href="#intelligence" class="mobile-nav-link">INTELLIGENCE</a>
+      <a href="#adapt" class="mobile-nav-link">ADAPT</a>
+      <a href="#about" class="mobile-nav-link">ABOUT</a>
+      <a href="#planner" class="btn btn-primary w-full mt-8">START PLANNING</a>
+    </div>
+  </nav>
+
+  <!-- HERO SECTION -->
+  <section id="hero" class="hero-section" aria-labelledby="hero-heading">
+    <div class="hero-inner">
+      <div class="hero-content" data-animate="fade-up">
+        <p class="eyebrow">AI TRAVEL INTELLIGENCE</p>
+        <h1 id="hero-heading" class="hero-heading">
+          PLAN LESS.<br/>
+          <span class="hero-accent">TRAVEL BETTER.</span>
+        </h1>
+        <p class="hero-sub-heading">YOUR JOURNEY,<br/>INTELLIGENTLY DESIGNED.</p>
+        <p class="hero-body">Turn your destination, time, interests and budget into a journey designed around the way you travel.</p>
+        <div class="destination-preview-card">
+          <div class="dest-preview-photo" style="background-image:url('https://images.unsplash.com/photo-1564890369478-c89ca6d9cde9?w=800&q=80');" role="img" aria-label="Ooty Nilgiri Tea Hills">
+            <div class="dest-photo-overlay"></div>
+            <div class="dest-preview-tag">FEATURED EXPEDITION</div>
+            <div class="dest-preview-badge">ELEVATION 2,240M</div>
+          </div>
+          <div class="dest-preview-route">
+            <div class="dest-preview-point">
+              <span class="dest-preview-label">ORIGIN</span>
+              <span class="dest-preview-name">Coimbatore</span>
+              <span class="geo-coord">11°01'N · 76°57'E · 411m</span>
+            </div>
+            <div class="dest-preview-arrow" aria-hidden="true">→</div>
+            <div class="dest-preview-point dest-highlight">
+              <span class="dest-preview-label">DESTINATION</span>
+              <span class="dest-preview-name serif-display">OOTY</span>
+              <span class="dest-preview-meta">Tamil Nadu, India</span>
+              <span class="geo-coord">11°24'N · 76°41'E · 2,240m</span>
+            </div>
+          </div>
+          <div class="dest-preview-stats">
+            <span><strong>~85 KM</strong> DISTANCE</span>
+            <span><strong>2 DAYS</strong> JOURNEY</span>
+            <span><strong>₹6,000</strong> ESTIMATE</span>
+          </div>
+          <div class="dest-preview-interests">
+            <span>NATURE</span> · <span>FOOD</span> · <span>PHOTOGRAPHY</span>
+          </div>
+        </div>
+        <div class="hero-ctas">
+          <a href="#planner" class="btn btn-primary btn-large" id="hero-cta-primary">BUILD MY JOURNEY →</a>
+          <a href="#how-it-works" class="btn btn-secondary btn-large">EXPLORE THE EXPERIENCE</a>
+        </div>
+        <div class="hero-stats">
+          <div class="hero-stat">
+            <span class="stat-num">94%</span>
+            <span class="stat-label">INTEREST MATCH</span>
+          </div>
+          <div class="hero-stat-divider"></div>
+          <div class="hero-stat">
+            <span class="stat-num">42 MIN</span>
+            <span class="stat-label">TIME SAVED</span>
+          </div>
+          <div class="hero-stat-divider"></div>
+          <div class="hero-stat">
+            <span class="stat-num">₹650</span>
+            <span class="stat-label">OPTIMIZED SAVINGS</span>
+          </div>
+        </div>
+        <div class="hero-geo-detail">
+          <span class="geo-coord">COIMBATORE · 11°01'N · 76°57'E · 411M</span>
+          <span class="geo-sep">→</span>
+          <span class="geo-coord">OOTY · 11°24'N · 76°41'E · 2,240M</span>
+          <span class="geo-distance">DISTANCE ~85 KM · EXPEDITION 2 DAYS</span>
+        </div>
+      </div>
+      <div class="hero-map-container" data-animate="fade-left">
+        <canvas id="hero-map-canvas" aria-label="Interactive route visualization from Coimbatore to Ooty"></canvas>
+        <!-- Floating Intelligence Cards -->
+        <div class="map-card map-card-origin" id="map-card-origin">
+          <div class="map-card-dot cyan"></div>
+          <div>
+            <div class="map-card-title">COIMBATORE</div>
+            <div class="map-card-sub">11°01'N · 76°57'E · 411m</div>
+          </div>
+        </div>
+        <div class="map-card map-card-dest" id="map-card-dest">
+          <div class="map-card-dot gold"></div>
+          <div>
+            <div class="map-card-title serif-display">OOTY</div>
+            <div class="map-card-sub">Tamil Nadu · 11°24'N · 76°41'E · 2,240m</div>
+          </div>
+        </div>
+        <div class="map-card map-card-info" id="map-card-info">
+          <div class="map-info-row">
+            <span class="map-info-icon">⏱</span>
+            <div>
+              <div class="map-info-val">2h 30m</div>
+              <div class="map-info-key">TRAVEL TIME</div>
+            </div>
+          </div>
+          <div class="map-info-row">
+            <span class="map-info-icon">📍</span>
+            <div>
+              <div class="map-info-val">86 km</div>
+              <div class="map-info-key">DISTANCE</div>
+            </div>
+          </div>
+          <div class="map-info-row">
+            <span class="map-info-icon">⛰️</span>
+            <div>
+              <div class="map-info-val">+1,829m</div>
+              <div class="map-info-key">ELEVATION GAIN</div>
+            </div>
+          </div>
+        </div>
+        <div class="hero-map-stops" aria-hidden="true">
+          <span class="map-stop nature">🌿 Nature</span>
+          <span class="map-stop food">🍜 Food</span>
+          <span class="map-stop photo">📷 Photo</span>
+          <span class="map-stop culture">🏛️ Culture</span>
+        </div>
+        <div class="map-card map-card-optimize" id="map-card-optimize">
+          <span class="optimize-badge">●</span>
+          <span>EXPEDITION ROUTE ACTIVE</span>
+        </div>
+        <div class="map-card map-card-activity" id="map-card-activity">
+          <div class="activity-dot"></div>
+          <div>
+            <div class="map-card-title">BOTANICAL GARDEN</div>
+            <div class="map-card-sub">92% MATCH · 08:45 AM · 2,100m</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-scroll-hint" aria-hidden="true">
+      <span>SCROLL TO EXPLORE</span>
+      <div class="scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- PROBLEM SECTION -->
+  <section id="problem" class="problem-section" aria-labelledby="problem-heading">
+    <div class="section-inner">
+      <p class="eyebrow">THE PROBLEM</p>
+      <h2 id="problem-heading" class="section-heading">TRAVEL IS <span class="text-gold">SCATTERED.</span></h2>
+      <p class="section-body">Travelers spend hours across dozens of sources — with no single intelligent layer tying it all together.</p>
+
+      <div class="problem-fragments" id="problem-fragments">
+        <div class="fragment-card" data-delay="0">
+          <div class="fragment-icon">🗺️</div>
+          <div class="fragment-label">DESTINATIONS</div>
+          <div class="fragment-sub">12+ websites</div>
+        </div>
+        <div class="fragment-card" data-delay="100">
+          <div class="fragment-icon">📅</div>
+          <div class="fragment-label">ITINERARIES</div>
+          <div class="fragment-sub">Blog after blog</div>
+        </div>
+        <div class="fragment-card" data-delay="200">
+          <div class="fragment-icon">🚌</div>
+          <div class="fragment-label">TRANSPORT</div>
+          <div class="fragment-sub">4 apps to check</div>
+        </div>
+        <div class="fragment-card" data-delay="300">
+          <div class="fragment-icon">💰</div>
+          <div class="fragment-label">BUDGET</div>
+          <div class="fragment-sub">Manual guesswork</div>
+        </div>
+        <div class="fragment-card" data-delay="400">
+          <div class="fragment-icon">🎯</div>
+          <div class="fragment-label">ACTIVITIES</div>
+          <div class="fragment-sub">Generic lists</div>
+        </div>
+        <div class="fragment-card" data-delay="500">
+          <div class="fragment-icon">🏠</div>
+          <div class="fragment-label">LOCAL INFO</div>
+          <div class="fragment-sub">Outdated sources</div>
+        </div>
+      </div>
+
+      <div class="problem-arrow" aria-hidden="true">
+        <div class="arrow-line"></div>
+        <div class="arrow-label">NEXORA UNIFIES ALL OF THIS</div>
+        <div class="arrow-line"></div>
+      </div>
+
+      <div class="problem-solution-card" id="problem-solution">
+        <div class="solution-glow"></div>
+        <div class="solution-icon">◈</div>
+        <h3 class="solution-heading">ONE INTELLIGENT JOURNEY.</h3>
+        <p class="solution-body">All your inputs. One adaptive AI layer. A journey built around you.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW NEXORA WORKS -->
+  <section id="how-it-works" class="how-section" aria-labelledby="how-heading">
+    <div class="section-inner">
+      <p class="eyebrow">THE PROCESS</p>
+      <h2 id="how-heading" class="section-heading">HOW <span class="text-sand">NEXORA</span> WORKS</h2>
+
+      <div class="process-flow">
+        <div class="process-step" data-step="01">
+          <div class="step-number">01</div>
+          <div class="step-content">
+            <h3 class="step-title">UNDERSTAND</h3>
+            <p class="step-body">You provide destination, time, budget, and interests. NEXORA builds your traveler profile.</p>
+            <div class="step-tags">
+              <span class="tag">Destination</span>
+              <span class="tag">Duration</span>
+              <span class="tag">Budget</span>
+              <span class="tag">Interests</span>
+            </div>
+          </div>
+          <div class="step-connector" aria-hidden="true"></div>
+        </div>
+        <div class="process-step" data-step="02">
+          <div class="step-number">02</div>
+          <div class="step-content">
+            <h3 class="step-title">ANALYZE</h3>
+            <p class="step-body">AI maps your preferences against all possible journey combinations and locations.</p>
+            <div class="step-tags">
+              <span class="tag">AI Matching</span>
+              <span class="tag">Pattern Analysis</span>
+              <span class="tag">Scoring</span>
+            </div>
+          </div>
+          <div class="step-connector" aria-hidden="true"></div>
+        </div>
+        <div class="process-step" data-step="03">
+          <div class="step-number">03</div>
+          <div class="step-content">
+            <h3 class="step-title">OPTIMIZE</h3>
+            <p class="step-body">Routes, time, cost, and activities are balanced to maximize your experience within constraints.</p>
+            <div class="step-tags">
+              <span class="tag">Route Optimization</span>
+              <span class="tag">Cost Balancing</span>
+              <span class="tag">Time Efficiency</span>
+            </div>
+          </div>
+          <div class="step-connector" aria-hidden="true"></div>
+        </div>
+        <div class="process-step" data-step="04">
+          <div class="step-number">04</div>
+          <div class="step-content">
+            <h3 class="step-title">PERSONALIZE</h3>
+            <p class="step-body">Recommendations are ranked around you — with explanations for every choice.</p>
+            <div class="step-tags">
+              <span class="tag">Interest Ranking</span>
+              <span class="tag">Explainable AI</span>
+              <span class="tag">Smart Suggestions</span>
+            </div>
+          </div>
+          <div class="step-connector" aria-hidden="true"></div>
+        </div>
+        <div class="process-step" data-step="05">
+          <div class="step-number">05</div>
+          <div class="step-content">
+            <h3 class="step-title">ADAPT</h3>
+            <p class="step-body">When constraints or conditions change, NEXORA dynamically reoptimizes your entire journey.</p>
+            <div class="step-tags">
+              <span class="tag">Dynamic Replanning</span>
+              <span class="tag">Disruption Handling</span>
+              <span class="tag">Real-time Updates</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TRIP PLANNER -->
+  <section id="planner" class="planner-section" aria-labelledby="planner-heading">
+    <div class="section-inner">
+      <p class="eyebrow">TRIP PLANNER</p>
+      <h2 id="planner-heading" class="section-heading">BUILD YOUR <span class="text-gold">JOURNEY</span></h2>
+      <p class="section-body">Provide your travel parameters. NEXORA will design an adaptive journey around you.</p>
+
+      <div class="planner-card" id="planner-card">
+        <div class="planner-grid">
+          <div class="planner-field">
+            <label for="from-input" class="field-label">FROM</label>
+            <div class="field-input-wrap">
+              <span class="field-icon">📍</span>
+              <input type="text" id="from-input" class="field-input" value="Coimbatore" placeholder="Origin city" aria-label="Departure city" />
+            </div>
+          </div>
+          <div class="planner-field">
+            <label for="to-input" class="field-label">TO</label>
+            <div class="field-input-wrap">
+              <span class="field-icon">🎯</span>
+              <input type="text" id="to-input" class="field-input" value="Ooty" placeholder="Destination city" aria-label="Destination city" />
+            </div>
+          </div>
+          <div class="planner-field">
+            <label for="duration-input" class="field-label">DURATION</label>
+            <div class="field-input-wrap">
+              <span class="field-icon">📅</span>
+              <div class="duration-control">
+                <button class="dur-btn" id="dur-minus" aria-label="Decrease duration">−</button>
+                <span id="duration-display" class="duration-val">2 Days</span>
+                <button class="dur-btn" id="dur-plus" aria-label="Increase duration">+</button>
+                <input type="hidden" id="duration-input" value="2" />
+              </div>
+            </div>
+          </div>
+          <div class="planner-field">
+            <label for="budget-input" class="field-label">BUDGET <span class="field-label-hint" id="budget-display">₹6,000</span></label>
+            <div class="field-input-wrap column">
+              <input type="range" id="budget-input" class="budget-slider" min="2000" max="15000" step="500" value="6000" aria-label="Travel budget in rupees" aria-valuemin="2000" aria-valuemax="15000" aria-valuenow="6000" />
+              <div class="slider-labels">
+                <span>₹2K</span>
+                <span>₹8.5K</span>
+                <span>₹15K</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="planner-interests">
+          <p class="field-label">INTERESTS <span class="field-label-hint">Select all that apply</span></p>
+          <div class="interest-chips" role="group" aria-label="Travel interests">
+            <button class="chip chip-active" data-interest="Nature" aria-pressed="true">🌿 Nature</button>
+            <button class="chip chip-active" data-interest="Food" aria-pressed="true">🍜 Food</button>
+            <button class="chip chip-active" data-interest="Photography" aria-pressed="true">📷 Photography</button>
+            <button class="chip" data-interest="Culture" aria-pressed="false">🏛️ Culture</button>
+            <button class="chip" data-interest="Adventure" aria-pressed="false">🧗 Adventure</button>
+            <button class="chip" data-interest="Shopping" aria-pressed="false">🛍️ Shopping</button>
+            <button class="chip" data-interest="History" aria-pressed="false">📜 History</button>
+            <button class="chip" data-interest="Wellness" aria-pressed="false">🧘 Wellness</button>
+          </div>
+        </div>
+
+        <div class="planner-style-transport">
+          <div class="planner-field-group">
+            <p class="field-label">TRAVEL STYLE</p>
+            <div class="style-options" role="radiogroup" aria-label="Travel style">
+              <button class="style-option" data-style="Low Cost" role="radio" aria-checked="false">LOW COST</button>
+              <button class="style-option style-active" data-style="Balanced" role="radio" aria-checked="true">BALANCED</button>
+              <button class="style-option" data-style="Comfort" role="radio" aria-checked="false">COMFORT</button>
+            </div>
+          </div>
+          <div class="planner-field-group">
+            <p class="field-label">TRANSPORT</p>
+            <div class="transport-options" role="radiogroup" aria-label="Transport preference">
+              <button class="transport-option transport-active" data-transport="Public" role="radio" aria-checked="true">🚌 PUBLIC / LOWEST COST</button>
+              <button class="transport-option" data-transport="Private" role="radio" aria-checked="false">🚗 PRIVATE / CONVENIENCE</button>
+              <button class="transport-option" data-transport="Mixed" role="radio" aria-checked="false">🔀 MIXED</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="planner-action">
+          <button class="btn btn-primary btn-xlarge" id="build-journey-btn" aria-label="Generate personalized journey">
+            BUILD MY JOURNEY →
+          </button>
+          <p class="planner-disclaimer">* Demo uses intelligent simulation. All values are estimates for demonstration purposes.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- AI PROCESSING OVERLAY -->
+  <div class="ai-processing-overlay" id="ai-overlay" aria-live="polite" aria-label="AI processing your journey" role="status" hidden>
+    <div class="ai-processing-card">
+      <div class="ai-logo-anim">
+        <div class="ai-ring ai-ring-1"></div>
+        <div class="ai-ring ai-ring-2"></div>
+        <div class="ai-ring ai-ring-3"></div>
+        <div class="ai-core">◈</div>
+      </div>
+      <div class="ai-title">DESIGNING YOUR TRIP</div>
+      <div class="ai-subtitle">AI TRAVEL INTELLIGENCE · ROUTE & BUDGET</div>
+      <div class="ai-steps" id="ai-steps">
+        <div class="ai-step" data-step="0">
+          <span class="ai-step-label">ANALYZING DESTINATION</span>
+          <span class="ai-step-status pending" aria-label="Pending">●</span>
+        </div>
+        <div class="ai-step" data-step="1">
+          <span class="ai-step-label">MATCHING INTERESTS</span>
+          <span class="ai-step-status pending" aria-label="Pending">●</span>
+        </div>
+        <div class="ai-step" data-step="2">
+          <span class="ai-step-label">OPTIMIZING ROUTES</span>
+          <span class="ai-step-status pending" aria-label="Pending">●</span>
+        </div>
+        <div class="ai-step" data-step="3">
+          <span class="ai-step-label">BALANCING BUDGET</span>
+          <span class="ai-step-status pending" aria-label="Pending">●</span>
+        </div>
+        <div class="ai-step" data-step="4">
+          <span class="ai-step-label">CALCULATING TIME</span>
+          <span class="ai-step-status pending" aria-label="Pending">●</span>
+        </div>
+        <div class="ai-step" data-step="5">
+          <span class="ai-step-label">BUILDING YOUR JOURNEY</span>
+          <span class="ai-step-status pending" aria-label="Pending">●</span>
+        </div>
+      </div>
+      <div class="ai-progress-bar">
+        <div class="ai-progress-fill" id="ai-progress-fill"></div>
+      </div>
+      <div class="ai-progress-pct" id="ai-progress-pct">0%</div>
+    </div>
+  </div>
+
+  <!-- JOURNEY DASHBOARD (hidden until generated) -->
+  <div id="journey-dashboard" hidden>
+
+    <!-- Journey Intelligence Panel -->
+    <section id="intelligence" class="intelligence-section" aria-labelledby="intelligence-heading">
+      <div class="section-inner">
+        <p class="eyebrow">JOURNEY METRICS</p>
+        <h2 id="intelligence-heading" class="section-heading">TRIP <span class="text-sand">INTELLIGENCE</span></h2>
+
+        <div class="intelligence-grid">
+          <div class="metric-card metric-large">
+            <div class="metric-val" data-count="94" data-suffix="%">0%</div>
+            <div class="metric-label">INTEREST MATCH</div>
+            <div class="metric-bar"><div class="metric-bar-fill" style="width:94%"></div></div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-val" data-count="650" data-prefix="₹">₹0</div>
+            <div class="metric-label">ESTIMATED SAVINGS</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-val" data-count="42" data-suffix=" MIN">0</div>
+            <div class="metric-label">TIME OPTIMIZED</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-val" id="activity-count-metric">0</div>
+            <div class="metric-label">ACTIVITIES</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-val" data-count="91" data-suffix="%">0%</div>
+            <div class="metric-label">ROUTE EFFICIENCY</div>
+            <div class="metric-bar"><div class="metric-bar-fill" style="width:91%"></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- YOUR JOURNEY -->
+    <section id="journey" class="journey-section" aria-labelledby="journey-heading">
+      <div class="section-inner journey-layout">
+        <div class="journey-left">
+          <p class="eyebrow">PERSONALIZED JOURNEY</p>
+          <h2 id="journey-heading" class="section-heading">YOUR <span class="text-gold">JOURNEY</span></h2>
+          <div class="day-tabs" role="tablist" aria-label="Journey days">
+            <button class="day-tab active" role="tab" aria-selected="true" aria-controls="day-1-panel" id="day-1-tab" data-day="1">DAY 01</button>
+            <button class="day-tab" role="tab" aria-selected="false" aria-controls="day-2-panel" id="day-2-tab" data-day="2">DAY 02</button>
+          </div>
+
+          <div id="day-1-panel" class="itinerary-panel" role="tabpanel" aria-labelledby="day-1-tab">
+            <!-- Populated by JS -->
+          </div>
+          <div id="day-2-panel" class="itinerary-panel" role="tabpanel" aria-labelledby="day-2-tab" hidden>
+            <!-- Populated by JS -->
+          </div>
+        </div>
+
+        <div class="journey-right">
+          <div class="journey-map-container" id="map">
+            <p class="eyebrow map-eyebrow">EXPEDITION MAP</p>
+            <canvas id="journey-map-canvas" aria-label="Journey route map"></canvas>
+            <div class="map-legend">
+              <div class="legend-item"><span class="legend-dot gold"></span>JOURNEY ROUTE</div>
+              <div class="legend-item"><span class="legend-dot gold"></span>STOPS & EXPERIENCES</div>
+              <div class="legend-item"><span class="legend-dot cyan"></span>ORIGIN / ACTIVE</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- BUDGET INTELLIGENCE -->
+    <section id="budget" class="budget-section" aria-labelledby="budget-heading">
+      <div class="section-inner">
+        <p class="eyebrow">TRIP BUDGET</p>
+        <h2 id="budget-heading" class="section-heading">YOUR <span class="text-gold">JOURNEY COST</span></h2>
+
+        <div class="budget-layout">
+          <div class="budget-visual-card">
+            <div class="budget-total-display">
+              <span class="budget-total-label">ESTIMATED TOTAL</span>
+              <span class="budget-total-val" id="budget-total-display">₹6,000</span>
+            </div>
+            <div class="budget-donut-wrap">
+              <canvas id="budget-donut" aria-label="Budget breakdown chart" width="200" height="200"></canvas>
+              <div class="donut-center">
+                <div class="donut-center-val" id="donut-spend">₹4,850</div>
+                <div class="donut-center-label">ESTIMATED SPEND</div>
+              </div>
+            </div>
+            <div class="budget-legend" id="budget-legend">
+              <!-- Populated by JS -->
+            </div>
+          </div>
+
+          <div class="budget-breakdown-card">
+            <h3 class="budget-card-title">BUDGET BREAKDOWN</h3>
+            <div class="budget-items" id="budget-items">
+              <!-- Populated by JS -->
+            </div>
+            <div class="budget-remaining">
+              <span>REMAINING</span>
+              <span class="budget-remaining-val" id="budget-remaining-val">₹1,150</span>
+            </div>
+            <button class="btn btn-secondary optimize-budget-btn" id="optimize-budget-btn">OPTIMIZE MY BUDGET →</button>
+
+            <div class="budget-optimization-result" id="budget-opt-result" hidden>
+              <div class="opt-comparison">
+                <div class="opt-before">
+                  <div class="opt-label">BEFORE</div>
+                  <div class="opt-val" id="opt-before-val">₹6,000</div>
+                </div>
+                <div class="opt-arrow">→</div>
+                <div class="opt-after">
+                  <div class="opt-label">AFTER</div>
+                  <div class="opt-val green" id="opt-after-val">₹5,350</div>
+                </div>
+                <div class="opt-savings">
+                  <div class="opt-label">SMART SAVING</div>
+                  <div class="opt-val gold" id="opt-savings-val">₹650</div>
+                </div>
+              </div>
+              <div class="opt-explanation" id="opt-explanation">
+                "Replaced a higher-cost activity with a nearby experience and reduced unnecessary route distance."
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- WHAT-IF OPTIMIZER -->
+    <section id="adapt" class="whatif-section" aria-labelledby="whatif-heading">
+      <div class="section-inner">
+        <p class="eyebrow">ADAPTIVE INTELLIGENCE</p>
+        <h2 id="whatif-heading" class="section-heading">WHAT IF YOUR <span class="text-sand">JOURNEY CHANGES?</span></h2>
+        <p class="section-body">Change budget, length, or travel style — NEXORA recalculates your route like a real expedition planner.</p>
+
+        <div class="whatif-layout">
+          <div class="whatif-controls-card">
+            <div class="whatif-field">
+              <label class="field-label">BUDGET <span class="field-label-hint" id="whatif-budget-display">₹6,000</span></label>
+              <input type="range" id="whatif-budget" class="budget-slider" min="3000" max="8000" step="500" value="6000" aria-label="What-if budget" />
+              <div class="slider-labels"><span>₹3K</span><span>₹5.5K</span><span>₹8K</span></div>
+            </div>
+            <div class="whatif-field">
+              <label class="field-label">DURATION <span class="field-label-hint" id="whatif-duration-display">2 Days</span></label>
+              <input type="range" id="whatif-duration" class="budget-slider" min="1" max="5" step="1" value="2" aria-label="What-if duration" />
+              <div class="slider-labels"><span>1 Day</span><span>3 Days</span><span>5 Days</span></div>
+            </div>
+            <div class="whatif-field">
+              <label class="field-label">TRAVEL STYLE</label>
+              <div class="style-options" role="radiogroup" aria-label="What-if travel style">
+                <button class="style-option" data-whatif-style="Low Cost" role="radio" aria-checked="false">LOW COST</button>
+                <button class="style-option style-active" data-whatif-style="Balanced" role="radio" aria-checked="true">BALANCED</button>
+                <button class="style-option" data-whatif-style="Comfort" role="radio" aria-checked="false">COMFORT</button>
+              </div>
+            </div>
+            <div class="whatif-field">
+              <label class="field-label">INTEREST PRIORITY</label>
+              <div class="interest-chips small" role="group" aria-label="Priority interests">
+                <button class="chip chip-active chip-sm" data-whatif-interest="Nature" aria-pressed="true">🌿 Nature</button>
+                <button class="chip chip-active chip-sm" data-whatif-interest="Food" aria-pressed="true">🍜 Food</button>
+                <button class="chip chip-active chip-sm" data-whatif-interest="Photography" aria-pressed="true">📷 Photo</button>
+                <button class="chip chip-sm" data-whatif-interest="Culture" aria-pressed="false">🏛️ Culture</button>
+                <button class="chip chip-sm" data-whatif-interest="Adventure" aria-pressed="false">🧗 Adventure</button>
+              </div>
+            </div>
+            <button class="btn btn-primary btn-large w-full" id="reoptimize-btn">REBUILD JOURNEY →</button>
+          </div>
+
+          <div class="whatif-result-area">
+            <div class="comparison-placeholder" id="comparison-placeholder">
+              <div class="placeholder-icon">⚡</div>
+              <p>Adjust the controls and click <strong>REOPTIMIZE</strong> to see your new journey</p>
+            </div>
+            <div class="journey-comparison" id="journey-comparison" hidden>
+              <div class="comparison-col">
+                <div class="comparison-col-title">CURRENT JOURNEY</div>
+                <div class="comparison-data" id="current-journey-data"><!-- filled by JS --></div>
+              </div>
+              <div class="comparison-vs">VS</div>
+              <div class="comparison-col">
+                <div class="comparison-col-title">NEW OPTIMIZED JOURNEY</div>
+                <div class="comparison-data" id="new-journey-data"><!-- filled by JS --></div>
+              </div>
+            </div>
+            <div class="reoptimize-explanation" id="reoptimize-explanation" hidden>
+              <!-- filled by JS -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- DISRUPTION SIMULATOR -->
+    <section id="disruption" class="disruption-section" aria-labelledby="disruption-heading">
+      <div class="section-inner">
+        <p class="eyebrow">DISRUPTION ADAPTATION</p>
+        <h2 id="disruption-heading" class="section-heading">WHEN PLANS CHANGE,<br/><span class="text-sand">NEXORA ADAPTS.</span></h2>
+        <p class="section-body">Real travel is unpredictable. NEXORA detects disruptions and instantly rebuilds your journey.</p>
+
+        <div class="disruption-layout">
+          <div class="disruption-trigger-card">
+            <div class="disruption-icon">🌧</div>
+            <h3>🌧 WEATHER CHANGE</h3>
+            <p>"Rain is expected around your outdoor viewpoint."</p>
+            <p class="disruption-sub">Experience how NEXORA dynamically adapts your route, replaces outdoor viewpoints with indoor cultural experiences, and preserves your time and budget.</p>
+            <button class="btn btn-primary btn-large" id="simulate-disruption-btn">SIMULATE DISRUPTION →</button>
+          </div>
+
+          <div class="disruption-result" id="disruption-result" hidden>
+            <!-- Populated by JS -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- AI INSIGHTS -->
+    <section id="ai-insights" class="insights-section" aria-labelledby="insights-heading">
+      <div class="section-inner">
+        <p class="eyebrow">AI INSIGHTS</p>
+        <h2 id="insights-heading" class="section-heading">AI <span class="text-sand">INSIGHTS</span></h2>
+
+        <div class="insights-grid" id="insights-grid">
+          <div class="insight-card">
+            <div class="insight-icon">🌅</div>
+            <div class="insight-title">AI INSIGHT · TIMING</div>
+            <div class="insight-body">"Morning route minimizes travel congestion in this demo journey, allowing more time at each location."</div>
+            <div class="insight-badge">TIMING OPTIMIZED</div>
+          </div>
+          <div class="insight-card">
+            <div class="insight-icon">💸</div>
+            <div class="insight-title">AI INSIGHT · ROUTE</div>
+            <div class="insight-body">"Current route reduces estimated transport cost by ₹320 compared to the next alternative."</div>
+            <div class="insight-badge">₹320 SAVED</div>
+          </div>
+          <div class="insight-card">
+            <div class="insight-icon">🎯</div>
+            <div class="insight-title">WHY THIS PLACE?</div>
+            <div class="insight-body">"Nature and photography activities receive the highest priority in your itinerary scheduling."</div>
+            <div class="insight-badge">94% MATCH</div>
+          </div>
+          <div class="insight-card">
+            <div class="insight-icon">⏱️</div>
+            <div class="insight-title">TIME SAVED</div>
+            <div class="insight-body">"Route grouping reduces unnecessary backtracking by 42 minutes across your 2-day journey."</div>
+            <div class="insight-badge">42 MIN SAVED</div>
+          </div>
+          <div class="insight-card">
+            <div class="insight-icon">💰</div>
+            <div class="insight-title">BUDGET HEALTH</div>
+            <div class="insight-body">"Estimated spend of ₹4,850 remains within your ₹6,000 target with a healthy ₹1,150 buffer."</div>
+            <div class="insight-badge">ON TRACK</div>
+          </div>
+          <div class="insight-card">
+            <div class="insight-icon">🗺️</div>
+            <div class="insight-title">ROUTE INTELLIGENCE</div>
+            <div class="insight-body">"Circular route avoids repetitive transit and covers maximum locations with minimum distance."</div>
+            <div class="insight-badge">91% EFFICIENCY</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- JOURNEY SUMMARY -->
+    <section id="summary" class="summary-section" aria-labelledby="summary-heading">
+      <div class="section-inner">
+        <p class="eyebrow">JOURNEY SUMMARY</p>
+        <h2 id="summary-heading" class="section-heading">YOUR JOURNEY,<br/><span class="text-gold">OPTIMIZED.</span></h2>
+
+        <div class="summary-card">
+          <div class="summary-hero-banner" style="background-image:url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1200&q=80');" role="img" aria-label="Nilgiri Mountain Range">
+            <div class="summary-hero-overlay"></div>
+            <div class="summary-hero-title serif-display">OOTY · EXPEDITION COMPLETE</div>
+            <div class="summary-hero-sub">Western Ghats Corridor · Tamil Nadu, India · 11°24'N · 76°41'E</div>
+          </div>
+          <div class="summary-glow"></div>
+          <div class="summary-metrics" id="summary-metrics">
+            <!-- Populated by JS -->
+          </div>
+          <div class="summary-actions">
+            <button class="btn btn-primary btn-large" id="save-journey-btn">SAVE JOURNEY</button>
+            <button class="btn btn-secondary btn-large" id="reoptimize-summary-btn">REOPTIMIZE</button>
+            <button class="btn btn-secondary btn-large" id="new-journey-btn">START NEW JOURNEY</button>
+          </div>
+          <div class="adaptive-badge">
+            <span class="badge-dot"></span>
+            ADAPTIVE ROUTING ENABLED
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- FAQ -->
+  <section id="about" class="faq-section" aria-labelledby="faq-heading">
+    <div class="section-inner">
+      <p class="eyebrow">FREQUENTLY ASKED</p>
+      <h2 id="faq-heading" class="section-heading">GOT <span class="text-sand">QUESTIONS?</span></h2>
+      <div class="faq-list" id="faq-list">
+        <!-- Populated by JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section class="final-cta-section" aria-labelledby="final-cta-heading">
+    <div class="section-inner">
+      <p class="eyebrow">READY TO EXPLORE DIFFERENTLY?</p>
+      <h2 id="final-cta-heading" class="cta-heading">YOUR NEXT JOURNEY<br/><span class="text-gold">STARTS HERE.</span></h2>
+      <p class="cta-body">Build a journey that adapts to you.</p>
+      <a href="#planner" class="btn btn-primary btn-xlarge">BUILD MY JOURNEY →</a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="footer-logo">
+          <span class="logo-icon">◈</span>
+          <span class="logo-text">NEXORA</span>
+        </div>
+        <p class="footer-tagline">AI TRAVEL INTELLIGENCE</p>
+        <p class="footer-challenge">Built for the AI-Powered Web Design Challenge</p>
+      </div>
+      <div class="footer-links">
+        <a href="#planner" class="footer-link">Planner</a>
+        <a href="#journey" class="footer-link">Journey</a>
+        <a href="#intelligence" class="footer-link">Intelligence</a>
+        <a href="#adapt" class="footer-link">Adapt</a>
+        <a href="#about" class="footer-link">About</a>
+      </div>
+      <div class="footer-note">
+        <p>This prototype uses simulated AI demo data for demonstration purposes. All itinerary values, cost estimates, and optimization metrics are illustrative examples, not real-time data.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/tokens.js"></script>
+  <script src="js/background.js"></script>
+  <script src="js/heromap.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/planner.js"></script>
+  <script src="js/journey.js"></script>
+  <script src="js/journeymap.js"></script>
+  <script src="js/budget.js"></script>
+  <script src="js/whatif.js"></script>
+  <script src="js/disruption.js"></script>
+  <script src="js/faq.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/animations.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
